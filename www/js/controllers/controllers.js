@@ -6,6 +6,10 @@ oauthApp.controller('welcomeCtrl', function ($scope, $state,$window, $cookieStor
 
     onDashboard = false;
     console.log(" on controller");
+     var parameters_string = location.hash.substring(1).split('#');
+    if (parameters_string=="face") {
+        console.log("Facebook");
+    }
         
     /* SOCIAL LOGIN
      * Facebook and Phone number
