@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>NETPIE Vote</title>
+
+        <!-- <link href="lib/ionic/css/ionic.css" rel="stylesheet"> -->
+        <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above-->
+        <link href="css/ionic.app.min.css" rel="stylesheet">
+        <link href="css/social-icons.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        
+        <!-- ionic/angularjs js -->
+        <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
+        <!-- cordova script (this will be a 404 during development) -->
+        <!--<script src="cordova.js"></script>-->
+
+        <script>
+            // Facebbok OAuth init
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '563906117137682', // Replace the App ID with yours
+                    status: true, // check login status
+                    cookie: true, // enable cookies to allow the server to access the session
+                    xfbml: true  // parse XFBML
+                });
+            };
+
+            // Load the SDK asynchronously
+            (function (d) {
+                var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                if (d.getElementById(id)) {
+                    return;
+                }
+                js = d.createElement('script');
+                js.id = id;
+                js.async = true;
+                js.src = "//connect.facebook.net/en_US/all.js";
+                ref.parentNode.insertBefore(js, ref);
+            }(document));
+            // Facebbok OAuth init - END
+        </script>
+
+        <script src="https://cdn.netpie.io/microgear.js"></script>
+        
+<script> 
+    const APPID = "testvote"; 
+    const KEY = "g1cCF9jyPjRTq7l"; 
+    const SECRET = "tig49bxdsWYX3fbU5CjjxH7VM"; 
+    const ALIAS = "arm"; 
+
+    var status = 0; 
+    var onstatus=0;
+    var onDashboard = false;
+    var test=0;
+    
+
+    var microgear = Microgear.create({ 
+        key: KEY, 
+        secret: SECRET, 
+        alias : ALIAS 
+    }); 
+
+    microgear.on('message',function(topic,msg) {
+        console.log("in come message "+msg);
+        var split_msg = msg.split("|");
+        if (split_msg[0]=="login") {
+            if (split_msg[1]=="facebook") {
+
+            }
+            if (split_msg[1]=="Phone number") {
+                
+            }
+        }
+
+        if(split_msg[0] == "can vote ?"){
+            if(split_msg[1] == "y"){
+                document.getElementById("voteStatus").innerHTML = "มีสิทธิโหวต";
+                microgear.chat("server", "request buttons|"+getid);
+             }else{
+                document.getElementById("loadImg").style.display = "none";
+                document.getElementById("voteStatus").innerHTML = "คุณได้ทำการโหวตเรียบร้อยแล้ว";
+            }
+             }else  if(split_msg[split_msg.length - 1] == "teams"){
+            document.getElementById("loadImg").style.display = "none";
+            if(canVote){
+                angular.element(document.getElementById('buttonGroup')).scope().addTeam(split_msg);
+            }
+        }
+    }); 
+
+    microgear.on('connected', function() { 
+        console.log(" on connected"); 
+        onstatus++;
+        console.log(" on connect count :"+onstatus);
+        microgear.subscribe("/client");
+        // microgear.chat("server", "server on ?");
+        document.getElementById("data").innerHTML = "เชื่อมต่อ NETPIE แล้ว";
+
+        if(getid){
+            microgear.chat("server", "can vote ?|"+getid);
+            microgear.setAlias(getid);
+            microgear.subscribe("/"+getid);
+        } 
+        if(onDashboard){
+            microgear.chat("server", "verify|"+ALIAS);
+        }
+    }); 
+
+    microgear.on('present', function(event) { 
+        console.log(event); 
+        console.log(" on present"); 
+    }); 
+
+    microgear.on('absent', function(event) { 
+        console.log(event); 
+        console.log(" on absent"); 
+    }); 
+
+    microgear.on('disconnected', function(event) { 
+        console.log(event); 
+        console.log("on disconnected"); 
+        microgear.connect(APPID);
+    }); 
+
+    function connectMicrogear(){ 
+        microgear.connect(APPID);
+        status = 1; 
+        onstatus = 1;      
+        console.log(" on resettoken");
+    } 
+    
+</script>
+    </head>
+    <body ng-app="oauthApp">
+
+        <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+        -->
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+     
+    <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.min.js"></script>
+
+    <!-- your app's js -->
+    <script src = "js/app.js" ></script>
+    <script src="js/controllers/controllers.js"></script>
+    
+</body>
+</html>

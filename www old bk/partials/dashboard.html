@@ -1,0 +1,62 @@
+
+
+
+<ion-view>
+    <ion-header-bar class="bar-header bar-positive">
+        <div class="title uppercase">Welcome to PIE VOTE</div>
+        <button class="button button-clear" ng-click="logout()">Logout</button>
+    </ion-header-bar>
+    <ion-content>
+
+        <div class="list">
+            <div class="profile-container" style="top: 0; bottom: 0; margin: 0;">
+                <!--<div id="em-profile" class="item">-->
+                    <!-- <img src="img/ionic.png"> -->
+                    <div ng-if="user.profilePic" class="profile-pic" ng-style="{'background-image': 'url(' + user.profilePic + ')'}"></div>
+                    <div ng-if="!user.profilePic" class="profile-pic" ng-style="background-image: url(img/profile-pic-default.png);"></div>
+                <!--</div>-->
+                <div id="myDiv">
+                    <div id="color">
+                        <div id="effect"></div>
+                    </div>
+                </div>
+                <div class="profile-background" ng-style="{'background-image': 'url(' + user.profilePic + ')'}"></div>
+            </div>
+            <div class="list">
+                <!-- <label class="item item-input field-disabled">
+                    <span class="input-label">Email</span>
+                    <input ng-model="user.email" type="text" placeholder="user@gmail.com">
+                </label> -->
+                <label class="item item-input">
+                    <span class="input-label">ชื่อผู้เข้าร่วม</span> 
+                    <div>{{user.name}}</div>
+                     
+                </label>
+              
+                <label class="item item-input">
+                    <SAMP class="input-label"> สถานะการเชื่อมต่อ</SAMP>   
+                    <div id="data">กรุณารอสักครู่อยู่ระหว่างการเชื่อมต่อNETPIE</div>                       
+                </label>
+
+                <label class="item item-input">
+                    <SAMP class="input-label"> สถานะการโหวต</SAMP>   
+                    <div id="voteStatus">กำลังดึงข้อมูล...</div>                       
+                </label>
+              <ion-scroll direction="y" style="height: 50vh"> 
+                <ion-list class="text-center">   
+                <br>
+                <div id="buttonGroup">
+                    <img id="loadImg" src="../img/loading_icon.gif" alt="" />
+                    <button class="button button-block button-assertive" ng-click="set(item)" style="position: absolute !important; left: 0 !important; right: 0 !important; margin: auto !important;" collection-repeat="item in items"  collection-item-height="60"> 
+                        {{item}} 
+                    </button> 
+                </div>
+                </ion-list>   
+                </ion-scroll> 
+            </div>
+        </div>
+        <div class="team">
+            
+        </div>
+    </ion-content>
+</ion-view>
