@@ -6,7 +6,7 @@ oauthApp.controller('welcomeCtrl', function ($scope, $state,$window, $cookieStor
 
     onDashboard = false;
     console.log(" on controller");
-     var parameters_string = location.hash.substring(1).split('#');
+    var parameters_string = location.hash.substring(1);
     console.log(parameters_string);
     if (parameters_string=="face") {
         console.log("Facebook");
