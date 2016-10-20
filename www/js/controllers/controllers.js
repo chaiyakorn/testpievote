@@ -6,8 +6,20 @@ oauthApp.controller('welcomeCtrl', function ($scope, $state,$window, $cookieStor
 
     onDashboard = false;
     console.log(" on controller");
-   var str = window.location.href;
+   
+    var str = window.location.href;
     console.log(" in tag "+str);
+    var strsplit=str.split('#')
+   
+    if (strsplit[2]=="Facebook") {
+        console.log("Facebook");
+      var Facebookbutton =  document.getElementById("FBbt");
+      Facebookbutton.style.visibility = "visible";
+    }else if (strsplit[2]=="Phone") {
+        console.log("Phone number");
+      var phonenumber = document.getElementById("Pnbt");
+      phonenumber.style.visibility = "visible";  
+    }
         
     /* SOCIAL LOGIN
      * Facebook and Phone number
