@@ -167,17 +167,24 @@ oauthApp.controller('dashboardCtrl', function ($scope, $window, $state, $cookieS
     }
     // Logout user
     $scope.logout = function () {
-        if(status == 1){ 
-            try{
-                microgear.disconnect(); 
-            }catch(error){
-                 microgear.connect(APPID);
-                 microgear.disconnect(); 
-            }
-        } 
-        $cookieStore.remove("userInfo"); 
-        $state.go('welcome'); 
-        $window.location.reload(); 
+       var alertPopup = $ionicPopup.alert({
+                        title: 'ออกจากระบบ',
+                        template: 'ออกจากระบบอัตโนมัต'
+                    });
+                    alertPopup.then(function(res) {
+                        if(res) {
+                            console.log('You are vote confirm ');
+                           try{
+                                microgear.disconnect(); 
+                                }catch(error){
+                                microgear.connect(APPID);
+                                microgear.disconnect(); 
+                             }
+                            $cookieStore.remove("userInfo"); 
+                              $state.go('welcome'); 
+                             $window.location.reload();
+                        } 
+                    });  
     };
 
     $scope.set = function(index) {
@@ -207,20 +214,21 @@ oauthApp.controller('dashboardCtrl', function ($scope, $window, $state, $cookieS
                 if (onerror==false) {
                     console.log("sending successfully")
                     console.log('You are sure');
-                    $scope.textshow = true;                      
-                    var alertPopup = $ionicPopup.alert({
-                        title: 'สถานะการโหวต',
-                        template: 'ออกจากระบบอัตโนมัต'
-                    });
-                    alertPopup.then(function(res) {
-                        if(res) {
-                            console.log('You are vote confirm ');
-                            microgear.disconnect();
-                            $cookieStore.remove("userInfo"); 
-                            $state.go('welcome'); 
-                            $window.location.reload();
-                        } 
-                    }); 
+                    $scope.textshow = true;  
+                    logout();
+//                     var alertPopup = $ionicPopup.alert({
+//                         title: 'สถานะการโหวต',
+//                         template: 'ออกจากระบบอัตโนมัต'
+//                     });
+//                     alertPopup.then(function(res) {
+//                         if(res) {
+//                             console.log('You are vote confirm ');
+//                             microgear.disconnect();
+//                             $cookieStore.remove("userInfo"); 
+//                             $state.go('welcome'); 
+//                             $window.location.reload();
+//                         } 
+//                     }); 
                 }                                                 
                                      
             } else {
