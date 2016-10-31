@@ -102,9 +102,10 @@ oauthApp.controller('welcomeCtrl', function ($scope, $state,$window, $cookieStor
         }catch(error){
                 // notting
         }
-       if (num ) {
+       if (num.length==10 ) {
             var user = {};
                     user.name = res;
+                    user.email = res;
                     getid=res;
                     getrespone=res;
                     user.profilePic="img/profile-pic-default.png";
