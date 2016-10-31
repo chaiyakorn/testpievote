@@ -109,7 +109,7 @@ oauthApp.controller('welcomeCtrl', function ($scope, $state,$window, $cookieStor
                     getid=res;
                     getrespone=res;
                     user.profilePic="img/profile-pic-default.png";
-                    
+                    connectMicrogear();
              $cookieStore.put('userInfo', user);
              $state.go('dashboard');
           }else{
