@@ -215,20 +215,20 @@ oauthApp.controller('dashboardCtrl', function ($scope, $window, $state, $cookieS
                     console.log("sending successfully")
                     console.log('You are sure');
                     $scope.textshow = true;  
-                    logout();
-//                     var alertPopup = $ionicPopup.alert({
-//                         title: 'สถานะการโหวต',
-//                         template: 'ออกจากระบบอัตโนมัต'
-//                     });
-//                     alertPopup.then(function(res) {
-//                         if(res) {
-//                             console.log('You are vote confirm ');
-//                             microgear.disconnect();
-//                             $cookieStore.remove("userInfo"); 
-//                             $state.go('welcome'); 
-//                             $window.location.reload();
-//                         } 
-//                     }); 
+//                     logout();
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'สถานะการโหวต',
+                        template: 'ออกจากระบบอัตโนมัต'
+                    });
+                    alertPopup.then(function(res) {
+                        if(res) {
+                            console.log('You are vote confirm ');
+                            microgear.disconnect();
+                            $cookieStore.remove("userInfo"); 
+                            $state.go('welcome'); 
+                            $window.location.reload();
+                        } 
+                    }); 
                 }                                                 
                                      
             } else {
