@@ -169,7 +169,7 @@ oauthApp.controller('dashboardCtrl', function ($scope, $window, $state, $cookieS
     $scope.logout = function () {
        var alertPopup = $ionicPopup.alert({
                         title: 'ออกจากระบบ',
-                        template: 'ออกจากระบบอัตโนมัต'
+                        template: 'ออกจากระบบอัตโนมัติ'
                     });
                     alertPopup.then(function(res) {
                         if(res) {
@@ -218,7 +218,7 @@ oauthApp.controller('dashboardCtrl', function ($scope, $window, $state, $cookieS
 //                     logout();
                     var alertPopup = $ionicPopup.alert({
                         title: 'สถานะการโหวต',
-                        template: 'ออกจากระบบอัตโนมัต'
+                        template: 'โหวตสำเร็จ ออกจากระบบ'
                     });
                     alertPopup.then(function(res) {
                         if(res) {
