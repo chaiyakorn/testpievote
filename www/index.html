@@ -79,17 +79,24 @@
             if(split_msg[1] == "y"){
                 document.getElementById("voteStatus").innerHTML = "มีสิทธิโหวต";
                 microgear.chat("server", "request buttons|"+getid);
+                 var counter=setInterval(requestbt, 5000); 
              }else{
                 document.getElementById("loadImg").style.display = "none";
                 document.getElementById("voteStatus").innerHTML = "คุณได้ทำการโหวตเรียบร้อยแล้ว";
             }
              }else  if(split_msg[split_msg.length - 1] == "teams"){
+                  clearInterval(counter);
             document.getElementById("loadImg").style.display = "none";
             if(canVote){
                 angular.element(document.getElementById('buttonGroup')).scope().addTeam(split_msg);
             }
         }
     }); 
+    
+     function requestbt()
+                    {
+                        microgear.chat("server", "request buttons|"+getid);
+                    };
 
     microgear.on('connected', function() { 
         console.log(" on connected"); 
